@@ -1,0 +1,91 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+desktop.ini
+Thumbs.db
+ehthumbs.db
+
+# IntelliJ / Android Studio
+*.iml
+*.ipr
+*.iws
+.idea/
+**/.idea/
+**/*.iml
+
+# Visual Studio Code
+.vscode/
+**/.vscode/
+
+# Flutter / Dart / Pub
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+**/.dart_tool/
+.flutter-plugins
+**/.flutter-plugins
+.flutter-plugins-dependencies
+**/.flutter-plugins-dependencies
+.pub-cache/
+**/.pub-cache/
+.pub/
+**/.pub/
+build/
+**/build/
+coverage/
+**/coverage/
+
+# Symbolication & Obfuscation
+app.*.symbols
+app.*.map.json
+
+# Android
+**/.gradle/
+**/android/app/debug
+**/android/app/profile
+**/android/app/release
+**/captures/
+**/local.properties
+**/GeneratedPluginRegistrant.java
+.cxx/
+**/.cxx/
+key.properties
+**/*.keystore
+**/*.jks
+
+# iOS / macOS
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/flutter_export_environment.sh
+**/ios/Flutter/Generated.h
+**/ios/Flutter/Generated.m
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/Flutter/GeneratedPluginRegistrant.h
+**/ios/Flutter/GeneratedPluginRegistrant.m
+**/ios/Pods/
+**/.symlinks/
+**/*.mode1v3
+**/*.mode2v3
+**/*.moved-aside
+**/*.pbxuser
+**/*.perspectivev3
+**/*.xcuserstate
+**/DerivedData/
+**/macos/Flutter/ephemeral/
+
+# Windows / Linux desktop
+**/windows/flutter/ephemeral/
+**/linux/flutter/ephemeral/
+
+# Environment / Secrets
+.env*
+!.env.example
