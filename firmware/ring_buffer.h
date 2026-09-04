@@ -1,4 +1,5 @@
 #pragma once
+#include <Arduino.h>
 #include "config.h"
 
 // Telemetry structure: exactly 28 bytes
@@ -12,22 +13,21 @@ struct TelemetryFrame {
     float gz;
 };
 
-class TelemetryRingBuffer {
+template <uint16_t CAPACITY>
+class TelemetryBuffer {
 private:
-    TelemetryFrame buffer[BUFFER_SIZE];
+    TelemetryFrame buffer[CAPACITY];
     uint16_t head;
     bool is_full;
 
 public:
-    TelemetryRingBuffer() : head(0), is_full(false) {}
+    TelemetryBuffer() : head(0), is_full(false) {}
 
-    // Resets buffer indices
     void reset() {
         head = 0;
         is_full = false;
     }
 
-    // Insert a new sensor reading (overwrites oldest entry if full)
     void push(uint32_t t, float ax, float ay, float az, float gx, float gy, float gz) {
         buffer[head].timestamp_ms = t;
         buffer[head].ax = ax;
@@ -38,26 +38,28 @@ public:
         buffer[head].gz = gz;
 
         head++;
-        if (head >= BUFFER_SIZE) {
+        if (head >= CAPACITY) {
             head = 0;
             is_full = true;
         }
     }
 
-    // Returns the total number of valid frames currently stored
     uint16_t getCount() const {
-        return is_full ? BUFFER_SIZE : head;
+        return is_full ? CAPACITY : head;
     }
 
-    // Retrieves frame at chronological index (0 = oldest, getCount()-1 = newest)
     TelemetryFrame getFrame(uint16_t chronological_index) const {
         if (!is_full) {
             return buffer[chronological_index];
         }
-        uint16_t actual_index = (head + chronological_index) % BUFFER_SIZE;
+        uint16_t actual_index = (head + chronological_index) % CAPACITY;
         return buffer[actual_index];
     }
 };
 
-// Global instance for all modules
-extern TelemetryRingBuffer blackBoxBuffer;
+// Typedefs for 10s pre-crash (200 samples) and 5s post-crash (100 samples)
+typedef TelemetryBuffer<PRE_CRASH_SAMPLES> PreCrashBuffer;
+typedef TelemetryBuffer<POST_CRASH_SAMPLES> PostCrashBuffer;
+
+extern PreCrashBuffer preCrashBuffer;
+extern PostCrashBuffer postCrashBuffer;

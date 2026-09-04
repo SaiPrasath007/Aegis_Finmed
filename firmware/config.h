@@ -27,6 +27,7 @@
 
 #define PRE_CRASH_SEC       10                          // History prior to impact
 #define POST_CRASH_SEC      5                           // Freeze capture post-impact
+#define PRE_CRASH_SAMPLES       (PRE_CRASH_SEC * SAMPLE_RATE_HZ)   // 200 samples
 #define POST_CRASH_SAMPLES  (SAMPLE_RATE_HZ * POST_CRASH_SEC) // 100 samples
 
 #define COUNTDOWN_PERIOD_MS 15000                       // 15-second driver cancel window
